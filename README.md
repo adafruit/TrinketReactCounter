@@ -1,18 +1,19 @@
 # TrinketReactCounter
 Trinket sketch to build a react or 'like' button that counts button presses and
-displays them on a 7-segment LED backpack.
+displays them on a 7-segment or 14-segment LED backpack.
 
 ## Hardware
 
 You need the following hardware to build this device:
 
 *   [Adafruit Trinket](https://www.adafruit.com/trinket) (either the [5V Trinket](https://www.adafruit.com/products/1501) or [3.3V Trinket](https://www.adafruit.com/products/1500) will work)
-*   [Adafruit 7-segment LED Backpack Display](https://www.adafruit.com/product/879)
+*   [Adafruit 7-segment LED Backpack Display](https://www.adafruit.com/product/879) or [Adafruit 14-segment quad alphanumeric LED Backpack Display](https://www.adafruit.com/product/1911)
 *   [Momentary push button](https://www.adafruit.com/products/1009)
 
 Connect the hardware as follows:
 
-*   Trinket 3V/5V power to 7-segment power (+) and one side of the button.
+*   Trinket 3V/5V power to 7-segment power (+) and one side of the button.  If
+    using the 14-segment display connect 3V/5V power to the additional power (+) pin.
 *   Trinket #0 to 7-segment SDA (D).
 *   Trinket #1 to opposite side of button.
 *   Trinket #2 to 7-segment SCL (C).
@@ -20,8 +21,10 @@ Connect the hardware as follows:
 
 ## Usage
 
-Load the sketch in Arduino and make sure the following libraries are
-installed (using the library manager or a manual install):
+Load the right sketch in Arduino depending on your hardware.  The 7-segment display
+should use the TrinketReactCounter_7segment sketch, and the 14-segment quad alphanumeric
+display should use the TrinketReactCounter_14segment sketch.  Make sure the following
+libraries are installed too (using the library manager or a manual install):
 
 *   [Adafruit GFX Library](https://github.com/adafruit/Adafruit-GFX-Library)
 *   [Adafruit LED Backpack](https://github.com/adafruit/Adafruit_LED_Backpack)

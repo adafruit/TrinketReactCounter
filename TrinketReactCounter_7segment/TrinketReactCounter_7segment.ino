@@ -1,9 +1,9 @@
-// Adafruit Trinket React Counter Sketch
+// Adafruit Trinket React Counter Sketch - 7-segment display
 //
-// Use a 7-segment LED backpack to display the number of times
-// a button has been pressed.  Great for building a physical 
-// 'like' or react button.  The value will be stored in EEPROM
-// so it will persist between power down/up.
+// Use a 7-segment LED backpack to display the number of times a 
+// button has been pressed.  Great for building a physical 'like'
+// or react button.  The value will be stored  in EEPROM so it 
+// will persist between power down/up.
 //
 // NOTE: As-is this sketch needs to run on a Trinket because it
 // assumes the switch on pin #1 has a pull-down resistor to ground.
@@ -30,18 +30,18 @@
                                       // Keep the default 0x70 unless you
                                       // change the backpack's address bridges.
 
-#define BUTTON_PIN             1      // Digital input connected to the button.
-                                      // This line should have a pull-down resistor
-                                      // to ground.  The opposite side of the button
-                                      // should be connected to a high level like
-                                      // 5V or 3.3V.
+#define COUNT_BUTTON_PIN       1      // Digital input connected to the button that
+                                      // will increase the count. This line should
+                                      // have a pull-down resistor to ground.  The
+                                      // opposite side of the button should be
+                                      // connected to a high level like 5V or 3.3V.
 
 #define COUNT_ADDRESS          0      // Address in EEPROM to store the counter.
                                       // This will take 2 bytes (16-bit value).
                                       // You don't need to change this unless you
                                       // want to play with different EEPROM locations.
 
-
+// 7-segment display
 Adafruit_7segment backpack = Adafruit_7segment();
 
 void update_display() {
@@ -53,9 +53,9 @@ void update_display() {
 }
 
 void setup() {
-  // Setup button input.
-  pinMode(BUTTON_PIN, INPUT);
-
+  // Setup button inputs.
+  pinMode(COUNT_BUTTON_PIN, INPUT);
+  
   // Initialize the LED backpack display.
   backpack.begin(LED_BACKPACK_ADDRESS);
 
@@ -72,10 +72,12 @@ void setup() {
 void loop() {
   // Take a couple button readings with a small delay in between to detect when
   // the signal changes from high to low, i.e. the button was released.
-  int first = digitalRead(BUTTON_PIN);
+  int firstCount = digitalRead(COUNT_BUTTON_PIN);
   delay(20);
-  int second = digitalRead(BUTTON_PIN);
-  if (first == HIGH && second == LOW) {
+  int secondCount = digitalRead(COUNT_BUTTON_PIN);
+
+  // Check for count button release.
+  if (firstCount == HIGH && secondCount == LOW) {
     // Button was released!
     // Increment the count value stored in EEPROM.
     uint16_t count;
